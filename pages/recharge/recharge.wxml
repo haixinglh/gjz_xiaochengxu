@@ -1,0 +1,17 @@
+<!--充值pages/recharge/recharge.wxml-->
+
+<view class='dqye'>当前贝壳：
+  <text>{{user.userMoney}}</text>
+</view>
+<view class='p'>请选择充值金额(1元=2积分)</view>
+<view class='ul'>
+  <view class="li {{price==100?'active':''}}" bindtap='selectMoney' data-price='100'>100元</view>
+  <view class="li {{price==200?'active':''}}" bindtap='selectMoney' data-price='200'>200元</view>
+  <view class="li {{price==300?'active':''}}" bindtap='selectMoney' data-price='300'>300元</view>
+  <view class="li {{price==400?'active':''}}" bindtap='selectMoney' data-price='400'>400元</view>
+  <view class="li {{price==500?'active':''}}" bindtap='selectMoney' data-price='500'>500元</view>
+  <view class="li {{price==1000?'active':''}}" bindtap='selectMoney' data-price='1000'>1000元</view>
+  <view class="li {{price==2000?'active':''}}" bindtap='selectMoney' data-price='2000'>2000元</view>
+  <view class="li {{price==5000?'active':''}}" bindtap='selectMoney' data-price='5000'>5000元</view>
+</view>
+<button class='czbtn' bindtap='recharge'>充值</button>

@@ -1,0 +1,47 @@
+<view class='detail'>
+  <image src='{{hostUrl}}{{model.IndexImg}}' mode='widthFix'></image>
+</view>
+<view class='detail_text'>
+  <text class='ttitle'>{{model.BName}}</text>
+</view>
+<view class='shangjia_span'>
+  <text class='text'>{{model.Param02}}</text>
+</view>
+<view class='shangjia_des'>
+  <text class='text'>介绍:{{model.Introduction}}</text>
+</view>
+<view class='shangjia_addr'>
+  <text class='text'>地址：{{model.Address}}</text>
+</view>
+<view class='cptit'>推荐产品
+  </view>
+  <view class='gwcon' style="margin-bottom:10px;float:left;display:block;">
+    <block wx:for="{{BandProlist}}" wx:key="{{item.id}}">
+      <navigator url="/pages/details/details?id={{item.id}}">
+        <view class='gwlist'>
+          <view class='gwpic'>
+            <image src='{{hostUrl}}{{item.litpic}}' mode='aspectFill'></image>
+            <view class='yishou'>已售:{{item.sales}}</view>
+          </view>
+          <view class='gwinfo'>
+            <view class='name'>{{item.name}}
+              <text>规格:/{{item.unit}}</text>
+            </view>
+            <view class='price'>
+              <text class='fuhao'>￥</text>{{item.price}}
+              <text class='jiao'></text>
+            </view>
+            <view class='yuan'>￥{{item.marketPrice}}</view>
+            <view class='gwc'>
+              <image src='../../images/gwico.png'></image>
+            </view>
+          </view>
+        </view>
+      </navigator>
+    </block>
+  </view>
+<view class='cptit'>特别提醒
+  </view>
+   <view class='gwcon' style="margin-bottom:10px;float:left;display:block;">
+   {{model.Des}}
+   </view>

@@ -1,0 +1,130 @@
+<!--pages/goods_list/goods_list.wxml-->
+<view class='search'>
+  <image src='../../images/search.jpg'></image>
+  <input type='text' placeholder='搜索商品名称' value="{{word}}" bindinput="searchActiveChangeinput" bindblur='searchSubmit'></input>
+</view>
+<view class='switch_box'>
+  <!-- 选中选项class=“active” -->
+  <view bindtap='switchTab' data-order='1' hover-class='none' class='{{switchTabOne==true ? "active":""}}'>
+    <text>排序</text>
+    <!-- 图片class="show"时显示 class="hide"隐藏 -->
+    <!-- <view wx:if="{{switchTabOne}}" >
+    <image src='../images/paixicon1.png' class='show'></image>
+    </view>
+    <view wx:else >
+    <image src='../images/paixicon2.png' class='show'></image>
+    </view> -->
+  </view>
+  <view bindtap='switchTab' data-order='2' hover-class='none' class='{{switchTabTwo==true ? "active":""}}'>
+    <text>默认</text>
+    <!-- <view wx:if="{{switchTabTwo}}" >
+    <image src='../images/paixicon1.png' class='show'></image>
+    </view>
+    <view wx:else>
+    <image src='../images/paixicon2.png' class='show'></image>
+    </view> -->
+  </view>
+  <view bindtap='switchTab' data-order='3' hover-class='none' class='{{switchTabThree==true ? "active":""}}'>
+    <text>价格</text>
+    <!-- <view wx:if="{{switchTabThree}}" >
+    <image src='../images/paixicon1.png' class='show'></image>
+    </view>
+    <view wx:else >
+    <image src='../images/paixicon2.png' class='show'></image>
+    </view> -->
+  </view>
+  <view bindtap='switchTab' data-order='4' hover-class='none' class='{{switchTabFour==true ? "active":""}}'>
+    <text>销量</text>
+    <!-- <view wx:if="{{switchTabFour}}" >
+    <image src='../images/paixicon1.png' class='show'></image>
+    </view>
+    <view wx:else>
+    <image src='../images/paixicon2.png' class='show'></image>
+    </view> -->
+  </view>
+  <view bindtap='switchTab' data-order='5' hover-class='none' class='{{switchTabFive==true ? "active":""}}'>
+    <text>上新</text>
+    <!-- <view wx:if="{{switchTabFive}}" >
+    <image src='../images/paixicon1.png' class='show'></image>
+    </view>
+    <view wx:else >
+    <image src='../images/paixicon2.png' class='show'></image>
+    </view> -->
+  </view>
+</view>
+<scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="bindDownLoad" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx">
+  <view class='list_box'>
+    <block wx:for="{{productList}}" wx:key="{{item.id}}">
+       <view class='good'>
+          <view class='img'>
+            <image src='{{hostUrl}}{{item.litpic}}' mode='aspectFill'></image>
+            <text>已售:{{item.sales}}</text>
+          </view>
+          <text class='title'>{{item.name}}</text>
+          <view class='jiege'>
+            <view class='jiage_box'>
+              <text class='small'>￥</text>
+              <text class='yuan'>{{item.price}}</text>
+              <text class='jiao'></text>
+            </view>
+            <text class='del'>￥{{item.marketPrice}}</text>
+            <view class="xqbtn"><button class='ljgma active' bindtap='chooseModel' data-id='{{item.id}}' >选择</button></view>
+          </view>
+        </view>
+    </block>
+    <!-- <text class='ling'>没有更多商品了</text> -->
+  </view>
+</scroll-view>
+<view class='fix_bot'>
+  <view class='jia'>
+  <view class='jiage_box'>
+      <text class='small'>应付金额：￥</text>
+      <text class='yuan'>{{dPayJine}}</text>
+    </view>
+    <view class='jiage_box'>
+      <text class='small'>已经产品金额：￥</text>
+      <text class='yuan'>{{dTotal}}</text>
+      <text class='jiao'></text>
+    </view>
+  </view>
+  <navigator bindtap='payNow'>马上结算</navigator>
+</view>
+<view>
+  <loading hidden="{{hidden}}">
+    加载中...
+  </loading>
+</view>
+<!-- 选规格 -->
+<view class="ceng" hidden='{{showCeng}}' bindtap='closeAllLayer'></view>
+<view class="xguige" hidden='{{showModel}}'>
+  <view class="close" bindtap='closeAllLayer'>
+    <image src="../../images/gbico.png"></image>
+  </view>
+  <view class="guigecon">
+    <view class="spinfo">
+      <image src='{{hostUrl}}{{model.litpic}}'></image>
+      <view class="spinfor">
+        <view>价格
+          <text>¥{{model.price}}</text>
+        </view>
+        <view>库存：{{model.stock}}</view>
+        <view>已选择：{{quantity}} {{model.unit}}</view>
+      </view>
+    </view>
+    <view class="xzgg">
+      <view>选择规格</view>
+      <view class='a active'>{{model.unit}}</view>
+    </view>
+    <view class="xzgg">
+      <view>选择规格</view>
+      <view class="num">
+        <view class="jian" bindtap='jian'>-</view>
+        <input type="text" name="" class="numipt" value="{{quantity}}" />
+        <view class="jia" bindtap='jia'>+</view>
+      </view>
+    </view>
+  </view>
+  <view class="xqbtn fix">
+    <button class="ljgma active" bindtap='orderProductCart' data-id='{{model.id}}' data-unit='{{model.unit}}' style="width:100%;line-height: 40px;">确认选择加入</button>
+  </view>
+</view>
